@@ -31,7 +31,7 @@
         "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
-        "symfony/maker-bundle": "^1.62"
+        "symfony/maker-bundle": "*"
     },
     "config": {
         "allow-plugins": {
