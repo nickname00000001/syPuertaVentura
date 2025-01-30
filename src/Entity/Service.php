@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ServiceRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Enum\ServiceType;
 
@@ -22,6 +24,17 @@ class Service
 
     #[ORM\Column(type: 'string', enumType: ServiceType::class)]
     private ?ServiceType $type = null;
+
+    /**
+     * @var Collection<int, UserService>
+     */
+    #[ORM\ManyToMany(targetEntity: UserService::class, mappedBy: 'serviceR')]
+    private Collection $serviceR;
+
+    public function __construct()
+    {
+        $this->serviceR = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -60,6 +73,33 @@ class Service
     public function setType(ServiceType $type): static
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, UserService>
+     */
+    public function getServiceR(): Collection
+    {
+        return $this->serviceR;
+    }
+
+    public function addServiceR(UserService $serviceR): static
+    {
+        if (!$this->serviceR->contains($serviceR)) {
+            $this->serviceR->add($serviceR);
+            $serviceR->addServiceR($this);
+        }
+
+        return $this;
+    }
+
+    public function removeServiceR(UserService $serviceR): static
+    {
+        if ($this->serviceR->removeElement($serviceR)) {
+            $serviceR->removeServiceR($this);
+        }
 
         return $this;
     }

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -31,6 +33,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     private ?string $password = null;
+
+    /**
+     * @var Collection<int, UserService>
+     */
+    #[ORM\ManyToMany(targetEntity: UserService::class, mappedBy: 'Usuario')]
+    private Collection $userSer;
+
+    public function __construct()
+    {
+        $this->userSer = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -105,5 +118,32 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection<int, UserService>
+     */
+    public function getUserSer(): Collection
+    {
+        return $this->userSer;
+    }
+
+    public function addUserSer(UserService $userSer): static
+    {
+        if (!$this->userSer->contains($userSer)) {
+            $this->userSer->add($userSer);
+            $userSer->addUsuario($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserSer(UserService $userSer): static
+    {
+        if ($this->userSer->removeElement($userSer)) {
+            $userSer->removeUsuario($this);
+        }
+
+        return $this;
     }
 }
