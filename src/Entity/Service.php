@@ -31,6 +31,10 @@ class Service
     #[ORM\ManyToMany(targetEntity: UserService::class, mappedBy: 'serviceR')]
     private Collection $serviceR;
 
+    #[ORM\ManyToOne(inversedBy: 'ServiceFood')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Food $ServiceAsociate = null;
+
     public function __construct()
     {
         $this->serviceR = new ArrayCollection();
@@ -100,6 +104,18 @@ class Service
         if ($this->serviceR->removeElement($serviceR)) {
             $serviceR->removeServiceR($this);
         }
+
+        return $this;
+    }
+
+    public function getServiceAsociate(): ?Food
+    {
+        return $this->ServiceAsociate;
+    }
+
+    public function setServiceAsociate(?Food $ServiceAsociate): static
+    {
+        $this->ServiceAsociate = $ServiceAsociate;
 
         return $this;
     }
