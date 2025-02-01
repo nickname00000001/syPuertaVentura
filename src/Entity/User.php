@@ -40,9 +40,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: UserService::class, mappedBy: 'Usuario')]
     private Collection $userSer;
 
+    /**
+     * @var Collection<int, Pay>
+     */
+    #[ORM\OneToMany(targetEntity: Pay::class, mappedBy: 'IdUser', orphanRemoval: true)]
+    private Collection $UserPay;
+
     public function __construct()
     {
         $this->userSer = new ArrayCollection();
+        $this->UserPay = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -142,6 +149,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->userSer->removeElement($userSer)) {
             $userSer->removeUsuario($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Pay>
+     */
+    public function getUserPay(): Collection
+    {
+        return $this->UserPay;
+    }
+
+    public function addUserPay(Pay $userPay): static
+    {
+        if (!$this->UserPay->contains($userPay)) {
+            $this->UserPay->add($userPay);
+            $userPay->setIdUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserPay(Pay $userPay): static
+    {
+        if ($this->UserPay->removeElement($userPay)) {
+            // set the owning side to null (unless already changed)
+            if ($userPay->getIdUser() === $this) {
+                $userPay->setIdUser(null);
+            }
         }
 
         return $this;

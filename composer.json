@@ -31,7 +31,9 @@
         "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
-        "symfony/maker-bundle": "*"
+        "doctrine/doctrine-fixtures-bundle": "^4.0",
+        "symfony/maker-bundle": "*",
+        "zenstruck/foundry": "^2.3"
     },
     "config": {
         "allow-plugins": {

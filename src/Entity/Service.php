@@ -35,9 +35,23 @@ class Service
     #[ORM\JoinColumn(nullable: false)]
     private ?Food $ServiceAsociate = null;
 
+    /**
+     * @var Collection<int, ServicePerEntry>
+     */
+    #[ORM\ManyToMany(targetEntity: ServicePerEntry::class, mappedBy: 'Service')]
+    private Collection $IdService;
+
+    /**
+     * @var Collection<int, Accommodation>
+     */
+    #[ORM\ManyToMany(targetEntity: Accommodation::class, mappedBy: 'IdService')]
+    private Collection $AccommodationService;
+
     public function __construct()
     {
         $this->serviceR = new ArrayCollection();
+        $this->IdService = new ArrayCollection();
+        $this->AccommodationService = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -116,6 +130,60 @@ class Service
     public function setServiceAsociate(?Food $ServiceAsociate): static
     {
         $this->ServiceAsociate = $ServiceAsociate;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ServicePerEntry>
+     */
+    public function getIdService(): Collection
+    {
+        return $this->IdService;
+    }
+
+    public function addIdService(ServicePerEntry $idService): static
+    {
+        if (!$this->IdService->contains($idService)) {
+            $this->IdService->add($idService);
+            $idService->addService($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIdService(ServicePerEntry $idService): static
+    {
+        if ($this->IdService->removeElement($idService)) {
+            $idService->removeService($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Accommodation>
+     */
+    public function getAccommodationService(): Collection
+    {
+        return $this->AccommodationService;
+    }
+
+    public function addAccommodationService(Accommodation $accommodationService): static
+    {
+        if (!$this->AccommodationService->contains($accommodationService)) {
+            $this->AccommodationService->add($accommodationService);
+            $accommodationService->addIdService($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAccommodationService(Accommodation $accommodationService): static
+    {
+        if ($this->AccommodationService->removeElement($accommodationService)) {
+            $accommodationService->removeIdService($this);
+        }
 
         return $this;
     }

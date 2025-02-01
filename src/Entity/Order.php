@@ -17,14 +17,12 @@ class Order
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'orderFood')]
+    #[ORM\ManyToOne(inversedBy: 'orders')]
     #[ORM\JoinColumn(nullable: false)]
-
+    private ?Food $FoodOrder = null;
 
     #[ORM\Column(type: 'string', enumType: StatusOrder::class)]
     private ?StatusOrder $status = null;
-    
-    private ?Food $FoodOrder = null;
 
     /**
      * @var Collection<int, PlatesOrder>
@@ -53,6 +51,7 @@ class Order
 
         return $this;
     }
+
     public function getStatus(): ?StatusOrder
     {
         return $this->status;
