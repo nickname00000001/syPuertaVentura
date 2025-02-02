@@ -89,12 +89,12 @@ class PlatesOrder
 
         return $this;
     }
-    public function getType(): ?TypePlate
+    public function getTplate(): ?TypePlate
     {
         return $this->tplate;
     }
 
-    public function setType(TypePlate $tplate): static
+    public function setTplate(TypePlate $tplate): static
     {
         $this->tplate = $tplate;
 

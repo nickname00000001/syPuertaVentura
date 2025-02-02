@@ -35,7 +35,7 @@ final class UserServiceFactory extends PersistentProxyObjectFactory
     {
         return [
             'reservationDate' => faker()->dateTime(),
-            'status' => faker()->randomElement(StatusReserve::cases())->value,
+            'state' => faker()->randomElement(StatusReserve::cases()),
             // Agrega aquí otros campos de la entidad UserService
         ];
     }

@@ -107,12 +107,12 @@ class PaymentEntry
         return $this;
     }
 
-    public function getPaymentType(): ?PaymentStatus
+    public function getStatusP(): ?PaymentStatus
     {
         return $this->statusP;
     }
 
-    public function setPaymentType(PaymentStatus $statusP): static
+    public function setStatusP(PaymentStatus $statusP): static
     {
         $this->statusP = $statusP;
 

@@ -34,9 +34,8 @@ final class OrderFactory extends PersistentProxyObjectFactory
     protected function defaults(): array|callable
     {
         return [
-            'orderDate' => faker()->dateTime(),
-            'totalAmount' => faker()->randomFloat(2, 20, 500),
-            // Agrega aquí otros campos de la entidad Order
+            'status' => faker()->randomElement(StatusOrder::cases()),
+            'foodOrder' => FoodFactory::random(),
         ];
     }
 

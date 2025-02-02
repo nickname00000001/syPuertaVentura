@@ -35,8 +35,8 @@ final class PlateFactory extends PersistentProxyObjectFactory
         return [
             'name' => faker()->word(),
             'description' => faker()->sentence(),
-            'price' => faker()->randomFloat(2, 5, 50),
-            // Agrega aquí otros campos de la entidad Plate
+            'Value' => faker()->randomFloat(2, 5, 50),
+            'stock' => faker()->numberBetween(1, 100),
         ];
     }
 

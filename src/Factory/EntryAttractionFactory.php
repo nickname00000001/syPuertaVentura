@@ -2,6 +2,8 @@
 
 namespace App\Factory;
 
+use App\Entity\Attraction;
+use App\Entity\Entry;
 use App\Entity\EntryAttraction;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 use function Zenstruck\Foundry\faker;
@@ -33,9 +35,7 @@ final class EntryAttractionFactory extends PersistentProxyObjectFactory
     protected function defaults(): array|callable
     {
         return [
-            'entryTime' => faker()->dateTime(),
-            'exitTime' => faker()->dateTime(),
-            // Agrega aquí otros campos de la entidad EntryAttraction
+           
         ];
     }
 

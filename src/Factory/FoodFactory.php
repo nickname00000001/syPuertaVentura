@@ -33,10 +33,7 @@ final class FoodFactory extends PersistentProxyObjectFactory
     protected function defaults(): array|callable
     {
         return [
-            'name' => faker()->word(),
-            'price' => faker()->randomFloat(2, 1, 100),
-            'description' => faker()->sentence(),
-            // Agrega aquí otros campos de la entidad Food
+            'Payment' => faker()->randomFloat(2, 1, 100),
         ];
     }
 

@@ -34,9 +34,10 @@ final class PayFactory extends PersistentProxyObjectFactory
     protected function defaults(): array|callable
     {
         return [
-            'amount' => faker()->randomFloat(2, 10, 1000),
-            'paymentMethod' => faker()->randomElement(PaymentMethod::cases()),
-            'paymentDate' => faker()->dateTime(),
+            'IdUser' => UserFactory::random(),
+            'total' => faker()->randomFloat(2, 10, 1000),
+            'typeP' => faker()->randomElement(PaymentMethod::cases()),
+            'PaymentDate' => faker()->dateTime(),
             // Agrega aquí otros campos de la entidad Pay
         ];
     }

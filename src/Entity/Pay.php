@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\PayRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Enum\PaymentMethod;
 
@@ -31,6 +32,9 @@ class Pay
      */
     #[ORM\ManyToMany(targetEntity: PaymentEntry::class, mappedBy: 'IdPay')]
     private Collection $PayId;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $PaymentDate = null;
 
     public function __construct()
     {
@@ -65,12 +69,12 @@ class Pay
 
         return $this;
     }
-    public function getPaymentType(): ?PaymentMethod
+    public function getTypeP(): ?PaymentMethod
     {
         return $this->typeP;
     }
 
-    public function setPaymentType(PaymentMethod $typeP): static
+    public function setTypeP(PaymentMethod $typeP): static
     {
         $this->typeP = $typeP;
 
@@ -100,6 +104,18 @@ class Pay
         if ($this->PayId->removeElement($payId)) {
             $payId->removeIdPay($this);
         }
+
+        return $this;
+    }
+
+    public function getPaymentDate(): ?\DateTimeInterface
+    {
+        return $this->PaymentDate;
+    }
+
+    public function setPaymentDate(\DateTimeInterface $PaymentDate): static
+    {
+        $this->PaymentDate = $PaymentDate;
 
         return $this;
     }

@@ -34,9 +34,8 @@ final class PaymentEntryFactory extends PersistentProxyObjectFactory
     protected function defaults(): array|callable
     {
         return [
-            'amount' => faker()->randomFloat(2, 10, 1000),
-            'status' => faker()->randomElement(PaymentStatus::cases()),
-            'paymentDate' => faker()->dateTime(),
+            'statusP' => faker()->randomElement(PaymentStatus::cases()),
+            'DatePayment' => faker()->dateTime(),
             // Agrega aquí otros campos de la entidad PaymentEntry
         ];
     }

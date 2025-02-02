@@ -34,9 +34,10 @@ final class ServiceFactory extends PersistentProxyObjectFactory
     protected function defaults(): array|callable
     {
         return [
-            'PhoneNumber' => faker()->phoneNumber(),
+            'PhoneNumber' => faker()->randomNumber(9,true),
             'NumberPeople' => faker()->numberBetween(1, 10),
-            'type' => faker()->randomElement(ServiceType::cases())->value,
+            'type' => faker()->randomElement(ServiceType::cases()),
+            'ServiceAsociate' => FoodFactory::random(),
             // Agrega aquí otros campos de la entidad Service
         ];
     }

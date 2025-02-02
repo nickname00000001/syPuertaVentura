@@ -33,8 +33,9 @@ final class EntryFactory extends PersistentProxyObjectFactory
     protected function defaults(): array|callable
     {
         return [
-            'entryDate' => faker()->dateTime(),
-            'ticketNumber' => faker()->unique()->numberBetween(1000, 9999),
+            'dateEntry' => faker()->dateTime(),
+            'Age' => faker()->numberBetween(0, 120),
+            'Tlf' => faker()->numberBetween(1000, 32767),
             // Agrega aquí otros campos de la entidad Entry
         ];
     }

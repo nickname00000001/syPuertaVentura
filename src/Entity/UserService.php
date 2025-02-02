@@ -106,12 +106,12 @@ class UserService
         return $this;
     }
 
-    public function getType(): ?StatusReserve
+    public function getState(): ?StatusReserve
     {
         return $this->state;
     }
 
-    public function setType(StatusReserve $state): self
+    public function setState(StatusReserve $state): self
     {
         $this->state = $state;
 

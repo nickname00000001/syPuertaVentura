@@ -36,7 +36,7 @@ final class PlatesOrderFactory extends PersistentProxyObjectFactory
         return [
             'NroPlates' => faker()->numberBetween(1, 10),
             'tplate' => faker()->randomElement(TypePlate::cases()),
-            // Agrega aquí otros campos de la entidad PlatesOrder
+            'NroOrder' => OrderFactory::random(),
         ];
     }
 
