@@ -39,7 +39,6 @@ final class AttractionFactory extends PersistentProxyObjectFactory
             'CloseTime' => faker()->dateTime(),
             'AgeMin' => faker()->numberBetween(5, 18),
             'Cost' => faker()->randomFloat(2, 10, 100),
-            // Agrega aquí otros campos de la entidad Attraction
         ];
     }
 
