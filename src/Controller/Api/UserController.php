@@ -25,6 +25,10 @@ final class UserController extends AbstractController
         $this->userService = $userService;
     }
 
+
+    //------------methods: -----------------------------------------
+
+
     #[Route('/get',methods:['POST'],name: 'user_get')]
     public function listUsers(): Response
     {

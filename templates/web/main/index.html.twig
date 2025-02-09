@@ -2,10 +2,9 @@
 
 {% block body %}
 <div class="jumbotron mt-4">
-    <h1 class="display-4">Welcome to MyApp!</h1>
+    <h1 class="display-4">Welcome to PuertaVentura page!</h1>
     <p class="lead">This is the main page for nickGuaman.</p>
     <hr class="my-4">
-    <p>Explore the features and pricing of our application.</p>
     <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
 </div>
 
@@ -16,4 +15,12 @@
         <li>Your template is located at <code>/home/ubuntu00/nick/appPuertaVentura/syPuertaventura/appPuertaVentura/templates/web/main/index.html.twig</code></li>
     </ul>
 </div>
+
+<div class="container">
+    <div class="row mt-5 mb-3">
+        <div class="col d-flex align-items-center">
+            <h1>mostrar registros</h1>
+            <a href="{{ path('app_web_form') }}" class="btn btn-success ms-auto">Nuevo<i class="bi bi-node-plus" style="margin-left:8px"></i></a>
+        </div>
+    </div>
 {% endblock %}
