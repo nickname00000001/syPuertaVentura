@@ -10,6 +10,9 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
 use App\Entity\User;
+use App\Security\EmailVerifier;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\Mime\Address;
 
 class UserServices
 {
@@ -18,7 +21,8 @@ class UserServices
 
     private UserRepository $userRepository;
 
-    public function __construct(UserRepository $userRepository, EntityManagerInterface $entityManagerInterface)
+
+    public function __construct(UserRepository $userRepository, EntityManagerInterface $entityManagerInterface,private EmailVerifier $emailVerifier)
     {
         $this->userRepository = $userRepository;
         $this->entityManagerInterface = $entityManagerInterface;
@@ -69,6 +73,36 @@ class UserServices
         $this->entityManagerInterface->flush();
         
     }
+
+
+    //funcion por defecto de symfony para registrar usuarios
+
+    public function register(User $user, $form)
+    {
+        
+        $passwordHasher = new UserPasswordHasherInterface();
+            /** @var string $plainPassword */
+            $plainPassword = $form->get('plainPassword')->getData();
+
+            // encode the plain password
+            $user->setPassword($passwordHasher->hashPassword($user, $plainPassword));
+
+            $this->entityManagerInterface->persist($user);
+            $this->entityManagerInterface->flush();
+
+            // generate a signed url and email it to the user
+            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
+                (new TemplatedEmail())
+                    ->from(new Address('mailer@puertaVentura.com', 'PuertaVentura Bot'))
+                    ->to((string) $user->getEmail())
+                    ->subject('Please Confirm your Email')
+                    ->htmlTemplate('registration/confirmation_email.html.twig')
+            );
+    }
+
+
+
+
 
     public function userDelete(Request $request): Response
     {

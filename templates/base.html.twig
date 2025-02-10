@@ -1,77 +1,160 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF-8">
+		<meta charset="UTF-8"/>
 
 		<title>
-			{% block title %}PuertaVentura
+			{% block title %}
+				PuertaVentura
 			{% endblock %}
 		</title>
 
 		{% block stylesheets %}
 			{# <link rel="stylesheet" href="{{absolute_url(asset('css/bootstrap.min.css'))}}"> #}
-			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"/>
 		{% endblock %}
-{% block importmap %}
-					{{ importmap('app') }}
-				{% endblock %}
-
+		{% block importmap %}
+			{{ importmap('app') }}
+		{% endblock %}
 	</head>
 	<body>
-		<nav class="navbar navbar-expand-lg bg-body-tertiary">
-			<div class="container-fluid">
-				<a class="navbar-brand" href="#">
+		<div class="container-fluid d-flex flex-column pe-0 ps-0">
+			<nav class="navbar navbar-dark bg-dark fixed-top  position-relative flex-column">
+				<div class="container-fluid">
 					<img src="{{ asset('images/AUcopia.png') }}" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-					Bootstrap
-				</a>
-				<a class="navbar-brand" href="#">Navbar scroll</a>
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse" id="navbarScroll">
-					<ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-						<li class="nav-item">
-							<a class="nav-link active" aria-current="page" href="#">Home</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#">Link</a>
-						</li>
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-								Link
-							</a>
-							<ul class="dropdown-menu">
-								<li>
-									<a class="dropdown-item" href="#">Action</a>
+
+					<a class="navbar-brand" href="#">PUERTA VENTURA</a>
+
+					<a class="navbar-brand" aria-current="page" href="#">Home</a>
+
+					<a class="navbar-brand" href="#">Link</a>
+
+					<li class="nav-item dropdown">
+						<a class="navbar-brand dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							Link
+						</a>
+						<ul class="dropdown-menu">
+							<li>
+								<a class="dropdown-item" href="#">Action</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="#">Another action</a>
+							</li>
+							<li><hr class="dropdown-divider"></li>
+							<li>
+								<a class="dropdown-item" href="#">Something else here</a>
+							</li>
+						</ul>
+					</li>
+
+					<a class="navbar-brand disabled" aria-disabled="true">Link</a>
+
+					<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+						<span class="bi bi-person"></span>
+					</button>
+
+					<div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+						<div class="offcanvas-header">
+							<h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">PUERTA VENTURA</h5>
+							<button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+						</div>
+
+						<div class="offcanvas-body">
+							<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+
+								<li class="nav-item dropdown">
+									<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+										Perfil
+									</a>
+									<ul class="dropdown-menu dropdown-menu-dark">
+										<li>
+											<a class="dropdown-item" href="{{ path('app_web_form') }}">Log in</a>
+											
+										</li>
+										<li>
+											<a class="dropdown-item" href="{{ path('user_register_form') }}">Registrarse</a>
+										</li>
+										<li>
+											<hr class="dropdown-divider">
+										</li>
+										<li>
+											<a class="dropdown-item" href="#">Cerrar sesion</a>
+										</li>
+									</ul>
 								</li>
-								<li>
-									<a class="dropdown-item" href="#">Another action</a>
-								</li>
-								<li><hr class="dropdown-divider"></li>
-								<li>
-									<a class="dropdown-item" href="#">Something else here</a>
-								</li>
+
 							</ul>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link disabled" aria-disabled="true">Link</a>
-						</li>
-					</ul>
-					<form class="d-flex" role="search">
-						<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-						<button class="btn btn-outline-success" type="submit">Search</button>
-					</form>
+
+							<form class="d-flex mt-3" role="search">
+								<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+								<button class="btn btn-outline-success" type="submit">Search</button>
+							</form>
+						</div>
+					</div>
 				</div>
-			</div>
-		</nav>
+			</nav>
 
-
-		<div class="container position-relative"> {% block body %}{% endblock %}
+			<div class="mainbody container-fluid  pe-0 ps-0 ms-0 me-0 d-flex flex-column"> {% block body %}{% endblock %}
 			</div>
+
+		</div>
+		
+		{# ----------------------------------------------------------------------------------footer--------------------------------------------------------- #}
+		<footer class="bg-gray-900 text-white pt-12 pb-8 px-4">
+    <div class="mx-auto px-4 container overflow-hidden flex flex-col lg:flex-row justify-between">
+        <a href="/" class="block mr-4 w-1/3">
+            <img src="https://i.imgur.com/JYin6lK.png" class="w-40 ml-4 lg:ml-0" alt="logo">
+        </a>
+        <div class="w-2/3 block sm:flex text-sm mt-6 lg:mt-0">
+            <ul class="text-gray-700 list-none p-0 font-thin flex flex-col text-left w-full">
+                <li class="inline-block py-2 px-3 text-white uppercase font-medium tracking-wide">Product</li>
+                <li><a href="#" class="inline-block py-2 px-3 text-gray-500 hover:text-white no-underline">Features</a></li>
+                <li><a href="#" class="inline-block py-2 px-3 text-gray-500 hover:text-white no-underline">Integrations</a></li>
+                <li><a href="#" class="inline-block py-2 px-3 text-gray-500 hover:text-white no-underline">Pricing</a></li>
+                <li><a href="#" class="inline-block py-2 px-3 text-gray-500 hover:text-white no-underline">FAQ</a></li>
+            </ul>
+            <ul class="text-gray-700 list-none p-0 font-thin flex flex-col text-left w-full">
+                <li class="inline-block py-2 px-3 text-white uppercase font-medium tracking-wide">Company</li>
+                <li><a href="#" class="inline-block py-2 px-3 text-gray-500 hover:text-white no-underline">Privacy</a>
+                </li>
+                <li><a href="#" class="inline-block py-2 px-3 text-gray-500 hover:text-white no-underline">Terms of Service</a></li>
+            </ul>
+            <ul class="text-gray-700 list-none p-0 font-thin flex flex-col text-left w-full">
+                <li class="inline-block py-2 px-3 text-white uppercase font-medium tracking-wide">Developers</li>
+                <li><a href="#" class="inline-block py-2 px-3 text-gray-500 hover:text-white no-underline">Developer API</a></li>
+                <li><a href="#" class="inline-block py-2 px-3 text-gray-500 hover:text-white no-underline">Documentation</a></li>
+                <li><a href="#" class="inline-block py-2 px-3 text-gray-500 hover:text-white no-underline">Guides</a></li>
+                </li>
+            </ul>
+            <div class="text-gray-700 flex flex-col w-full">
+                <div class="inline-block py-2 px-3 text-white uppercase font-medium tracking-wide">Follow Us</div>
+                <div class="flex pl-4 justify-start mt-2">
+                    <a class="d-flex items-center text-gray-300 hover:text-white mr-6 no-underline" href="#">
+                        <svg viewBox="0 0 24 24" class="fill-current w-5 h-5" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M23.998 12c0-6.628-5.372-12-11.999-12C5.372 0 0 5.372 0 12c0 5.988 4.388 10.952 10.124 11.852v-8.384H7.078v-3.469h3.046V9.356c0-3.008 1.792-4.669 4.532-4.669 1.313 0 2.686.234 2.686.234v2.953H15.83c-1.49 0-1.955.925-1.955 1.874V12h3.328l-.532 3.469h-2.796v8.384c5.736-.9 10.124-5.864 10.124-11.853z" /></svg>
+                    </a>
+                    <a class="d-flex items-center text-gray-300 hover:text-white mr-6 no-underline" href="#">
+                        <svg viewBox="0 0 24 24" class="fill-current w-5 h-5" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M23.954 4.569a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.691 8.094 4.066 6.13 1.64 3.161a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.061a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.937 4.937 0 004.604 3.417 9.868 9.868 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.054 0 13.999-7.496 13.999-13.986 0-.209 0-.42-.015-.63a9.936 9.936 0 002.46-2.548l-.047-.02z" /></svg>
+                    </a>
+                    <a class="d-flex items-center text-gray-300 hover:text-white no-underline" href="#">
+                        <svg viewBox="0 0 24 24" class="fill-current w-5 h-5" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" /></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pt-4 mt-4 pt-6 text-gray-600 border-t border-gray-800 text-center"> © 2019 WeTeach. All rights reserved.</div>
+</footer>
+
+		{# ----------------------------------------------------------------------------------end-footer--------------------------------------------------------- #}
+
+		
 
 			{# ruta absoluta para bootsrtap: #}
 			{# {% block javascripts %}
-				 <script src="{{absolute_url(asset('js/bootstrap.bundle.min.js'))}}"></script>
-			{% endblock %} #}
+				   <script src="{{absolute_url(asset('js/bootstrap.bundle.min.js'))}}"></script>{% endblock %}
+			#}
 		</body>
 	</html>

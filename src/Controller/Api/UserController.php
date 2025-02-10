@@ -10,6 +10,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 use App\Entity\User;
+use App\Entity\UserService;
 use App\Service\UserServices;
 
 //Esto es para no tener que poner /api en todas las rutas ya que se entiende que todas van a tener /api
@@ -19,6 +20,7 @@ final class UserController extends AbstractController
 {
 
     private UserServices $userService;
+
 
     public function __construct(UserServices $userService)
     {
