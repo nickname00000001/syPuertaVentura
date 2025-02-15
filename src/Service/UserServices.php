@@ -21,11 +21,13 @@ class UserServices
 
     private UserRepository $userRepository;
 
+    private UserPasswordHasherInterface $passwordHasher;
 
-    public function __construct(UserRepository $userRepository, EntityManagerInterface $entityManagerInterface,private EmailVerifier $emailVerifier)
+    public function __construct(UserRepository $userRepository, EntityManagerInterface $entityManagerInterface,private EmailVerifier $emailVerifier,UserPasswordHasherInterface $passwordHasher)
     {
         $this->userRepository = $userRepository;
         $this->entityManagerInterface = $entityManagerInterface;
+        $this->passwordHasher = $passwordHasher;
     }
 
     public function getAllUsers(): array
@@ -56,13 +58,12 @@ class UserServices
     public function registerUsers( Request $request)
     {
 
-        $passwordHasher = new UserPasswordHasherInterface();
         $body = $request->getContent();
         $data = json_decode($body, true);
 
         $user = new User();
         $user->setEmail($data['email']);
-        $hashedPassword = $passwordHasher->hashPassword(
+        $hashedPassword = $this->passwordHasher->hashPassword(
             $user,
             $data['password'],
         );
@@ -80,12 +81,11 @@ class UserServices
     public function register(User $user, $form)
     {
         
-        $passwordHasher = new UserPasswordHasherInterface();
             /** @var string $plainPassword */
             $plainPassword = $form->get('plainPassword')->getData();
 
             // encode the plain password
-            $user->setPassword($passwordHasher->hashPassword($user, $plainPassword));
+            $user->setPassword($this->passwordHasher->hashPassword($user, $plainPassword));
 
             $this->entityManagerInterface->persist($user);
             $this->entityManagerInterface->flush();

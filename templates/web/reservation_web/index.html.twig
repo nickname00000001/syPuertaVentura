@@ -1,0 +1,142 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+	<style>
+		.example-wrapper {
+			margin: 1em auto;
+			max-width: 800px;
+			width: 95%;
+			font: 18px / 1.5 sans-serif;
+		}
+		.example-wrapper code {
+			background: #F5F5F5;
+			padding: 2px 6px;
+		}
+	</style>
+
+	<div class="d-flex justify-content-center">
+		<h1>Nuestros servicios</h1>
+	</div>
+	<div class="d-flex">
+
+		<div class="card flex-fill" style="width:500px">
+			<img class="card-img-top" src="{{ asset('images/img4.jpg') }}" alt="Card image">
+			<div class="card-img-overlay">
+				<h4 class="card-title">RESERVAR PARA HOY</h4>
+				<p class="card-text">Ahorrese la espera y reserve aqui.</p>
+				<a href="#" class="btn btn-primary">RESERVAR</a>
+			</div>
+		</div>
+
+		<div class="card flex-fill" style="width:500px">
+			<img class="card-img-top" src="{{ asset('images/imgparque.jpg') }}" alt="Card image">
+			<div class="card-img-overlay">
+				<h4 class="card-title">RESERVAR UNA FECHA</h4>
+				<p class="card-text">Reserve para una fecha en concreto.</p>
+				<a href="#" class="btn btn-primary">RESERVAR</a>
+			</div>
+		</div>
+
+		<div class="card flex-fill" style="width:500px">
+			<img class="card-img-top" src="{{ asset('images/boda.JPG') }}" alt="Card image">
+			<div class="card-img-overlay">
+				<h4 class="card-title">EVENTOS</h4>
+				<p class="card-text">Some example text.</p>
+				<a href="#" class="btn btn-primary">RESERVAR</a>
+			</div>
+		</div>
+
+
+	</div>
+	<div class="d-flex justify-content-center bg-info">
+		<h1>selecciona el numero de entradas:</h1>
+		<input type="number" name="" id="">
+	</div>
+	<div>
+		<h1>Nuestros servicios:</h1>
+		<select name="" id="">
+			<option value="1">Hospedaje</option>
+			<option value="2">Camping</option>
+			<option value="3">Restaurante</option>
+		</select>
+	</div>
+
+	<div class="option_restaurante">
+
+		<form action="/action_page.php">
+			<div class="mb-3 mt-3">
+				<label for="">Tipo de plato</label>
+				<select name="" id="">
+					<option value="1">Entrantes</option>
+					<option value="1">Segundos</option>
+					<option value="1">Postres</option>
+				</select>
+			</div>
+			<div class="container mt-3">
+				<h2>Seleccione la cantidad:</h2>
+				<table class="table table-success table-hover">
+					<thead class="table-dark">
+						<tr>
+							<th>Nombre</th>
+							<th>Precio</th>
+							<th>Disponibilidad</th>
+							<th>Cantidad</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>John</td>
+							<td>Doe</td>
+							<td>john@example.com</td>
+							<td>john@example.com</td>
+						</tr>
+						<tr>
+							<td>Mary</td>
+							<td>Moe</td>
+							<td>mary@example.com</td>
+							<td>john@example.com</td>
+						</tr>
+						<tr>
+							<td>July</td>
+							<td>Dooley</td>
+							<td>july@example.com</td>
+							<td>john@example.com</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="form-check mb-3">
+				<label class="form-check-label">
+					<input class="form-check-input" type="checkbox" name="remember">
+					Remember me
+				</label>
+			</div>
+			<button type="submit" class="btn btn-primary">Pagar</button>
+		</form>
+	</div>
+
+	<div>
+		<h1>Nuestras atracciones:</h1>
+		<select name="" id="">
+			<option value="1">Hospedaje</option>
+			<option value="2">Camping</option>
+			<option value="3">Restaurante</option>
+		</select>
+	</div>
+
+
+	<div class="example-wrapper d-flex flex-column">
+		<h1>Hello
+			{{ controller_name }}! ✅</h1>
+
+		This friendly message is coming from:
+		<ul>
+			<li>Your controller at
+				<code>/home/ubuntu00/nick/appPuertaVentura/syPuertaventura/appPuertaVentura/src/Controller/Web/ReservationWebController.php</code>
+			</li>
+			<li>Your template at
+				<code>/home/ubuntu00/nick/appPuertaVentura/syPuertaventura/appPuertaVentura/templates/web/reservation_web/index.html.twig</code>
+			</li>
+		</ul>
+	</div>
+	<div data-controller="hello"></div>
+{% endblock %}

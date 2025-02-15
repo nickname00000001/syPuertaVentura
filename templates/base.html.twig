@@ -23,15 +23,15 @@
 				<div class="container-fluid">
 					<img src="{{ asset('images/AUcopia.png') }}" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
 
-					<a class="navbar-brand" href="#">PUERTA VENTURA</a>
+					<a class="navbar-brand" href="{{ path('app_web_main') }}">PUERTA VENTURA</a>
 
-					<a class="navbar-brand" aria-current="page" href="#">Home</a>
+					<a class="navbar-brand" aria-current="page" href="{{ path('app_web_reservation_web') }}">RESERVA</a>
 
-					<a class="navbar-brand" href="#">Link</a>
+					<a class="navbar-brand" href="#">RESTAURANTE</a>
 
 					<li class="nav-item dropdown">
 						<a class="navbar-brand dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							Link
+							ATRACCIONES
 						</a>
 						<ul class="dropdown-menu">
 							<li>
@@ -47,7 +47,7 @@
 						</ul>
 					</li>
 
-					<a class="navbar-brand disabled" aria-disabled="true">Link</a>
+					<a class="navbar-brand disabled" aria-disabled="true">GALERIA</a>
 
 					<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
 						<span class="bi bi-person"></span>
@@ -72,7 +72,7 @@
 											
 										</li>
 										<li>
-											<a class="dropdown-item" href="{{ path('user_register_form') }}">Registrarse</a>
+											<a class="dropdown-item" href="{{ path('app_registrarse') }}">Registrarse</a>
 										</li>
 										<li>
 											<hr class="dropdown-divider">
@@ -103,7 +103,7 @@
 		<footer class="bg-gray-900 text-white pt-12 pb-8 px-4">
     <div class="mx-auto px-4 container overflow-hidden flex flex-col lg:flex-row justify-between">
         <a href="/" class="block mr-4 w-1/3">
-            <img src="https://i.imgur.com/JYin6lK.png" class="w-40 ml-4 lg:ml-0" alt="logo">
+            <img src="{{ asset('images/AUcopia.png') }}" class="w-40 ml-4 lg:ml-0" alt="logo">
         </a>
         <div class="w-2/3 block sm:flex text-sm mt-6 lg:mt-0">
             <ul class="text-gray-700 list-none p-0 font-thin flex flex-col text-left w-full">

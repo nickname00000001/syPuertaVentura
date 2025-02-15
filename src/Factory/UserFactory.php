@@ -37,6 +37,7 @@ final class UserFactory extends PersistentProxyObjectFactory
             'email' => faker()->email(),
             'password' => 'password', // You might want to hash this password
             'roles' => ['ROLE_USER'],
+            'isVerified' => false,
             // Agrega aquí otros campos de la entidad User
         ];
     }

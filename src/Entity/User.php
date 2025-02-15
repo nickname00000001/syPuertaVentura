@@ -39,6 +39,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
+    #[ORM\Column]
+    private bool $isVerified = false;
+
+
     /**
      * @var Collection<int, UserService>
      */
@@ -51,9 +55,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Pay::class, mappedBy: 'IdUser', orphanRemoval: true)]
     private Collection $UserPay;
 
-    #[ORM\Column]
-    private bool $isVerified = false;
-
+   
     public function __construct()
     {
         $this->userSer = new ArrayCollection();

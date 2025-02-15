@@ -24,8 +24,8 @@ class RegistrationController extends AbstractController
     {
         $this->userService = $userService;
     }
-
-    #[Route('/register', name: 'app_register')]
+/* 
+    #[Route('/registrarse',  name: 'app_registrarse')]
     public function register(Request $request): Response
     {
     
@@ -39,9 +39,30 @@ class RegistrationController extends AbstractController
         }
         return $this->json([
             'message' => 'error',
-            'form' => $form
+            'form' => $form,
+            'eaui' => 'hasta aqui llegamos'
         ], Response::HTTP_BAD_REQUEST);
+    } */
+
+    #[Route('/registrarse',  name: 'app_registrarse')]
+    public function register(Request $request): Response
+    {
+    
+        $user = new User();
+        $form = $this->createForm(RegistrationFormType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->userService->register($user,$form);
+            return $this->redirectToRoute('app_web_main');
+        }
+        return $this->render('registration/register.html.twig', [
+            'registrationForm' => $form,
+        ]);
     }
+
+
+
 
     #[Route('/verify/email', name: 'app_verify_email')]
     public function verifyUserEmail(Request $request, TranslatorInterface $translator): Response

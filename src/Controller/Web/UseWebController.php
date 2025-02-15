@@ -7,6 +7,7 @@ use App\Form\RegistrationFormType;
 use App\Form\UserFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpClient\HttpClient;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
@@ -37,6 +38,28 @@ final class UseWebController extends AbstractController{
         ]);
     }
 
+    intento de redireccionar::
+
+    #[Route('/register', name: 'user_register_form')]
+    public function userRegister(Request $request): Response
+    {
+
+        $response = $this->client->request('GET', $this->generateUrl('app_registrarse'));
+
+
+        $data = $response->toArray();
+
+
+        if ($response->getStatusCode() === 200) {
+            return $this->redirectToRoute('app_web_main');
+        }
+
+        return $this->render('registration/register.html.twig', [
+            'registrationForm' => $data['form']->createView(),
+        ]);
+    }
+
+
  */
     #[Route('/showform', name: 'app_web_form')]
     public function indexForm(): Response
@@ -49,34 +72,8 @@ final class UseWebController extends AbstractController{
         ]);
     }
 
-    #[Route('/register', name: 'user_register_form')]
-    public function userRegister(): Response
-    {
+    
 
-        // Realizar la solicitud a la API
-        /* $response = $this->client->request('POST', 'https://example.com/api/get',[
-            'body' =>'email',
-        ]); */
-        $response = $this->client->request('POST', $this->generateUrl('app_register'), [
-            'body' => 'email',
-        ]);
-
-
-        // Obtener el contenido de la respuesta
-        $data = $response->toArray();
-
-/* 
-        if ($form->isSubmitted() && $form->isValid()) {
-            return $this->redirectToRoute('app_web_main');
-        } */
-
-        
-        // Pasar los datos a la plantilla
-        $formu = $response->form;
-        return $this->render('registration/register.html.twig', [
-            'registrationForm' => $formu,
-            'api_data' => $data
-        ]);
-    }
+    
 
 }

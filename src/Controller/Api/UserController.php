@@ -40,7 +40,8 @@ final class UserController extends AbstractController
     }
 
 
-    #[Route('/userRegister',methods:['POST'], name: 'user_register')]
+  /* registro de video
+    #[Route('/userRegisterOtro',methods:['POST'], name: 'user_registerOtro')]
 
     public function Register(Request $request): Response
     {
@@ -48,7 +49,7 @@ final class UserController extends AbstractController
 
         return $this->json("User created", Response::HTTP_CREATED);
     }
-
+ */
 
     #[Route('/delete', name: 'user_delete')]
     public function Delete(Request $request): Response
