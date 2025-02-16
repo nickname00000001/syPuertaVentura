@@ -29,8 +29,7 @@ class PlatesOrder
     #[ORM\Column]
     private ?int $NroPlates = null;
 
-    #[ORM\Column(type: 'string', enumType: TypePlate::class)]
-    private ?TypePlate $tplate = null;
+  
 
     public function __construct()
     {
@@ -89,15 +88,5 @@ class PlatesOrder
 
         return $this;
     }
-    public function getTplate(): ?TypePlate
-    {
-        return $this->tplate;
-    }
-
-    public function setTplate(TypePlate $tplate): static
-    {
-        $this->tplate = $tplate;
-
-        return $this;
-    }
+    
 }

@@ -19,11 +19,11 @@ class PlateRepository extends ServiceEntityRepository
         /**
          * @return Plate[] Returns an array of Plate objects
          */
-        public function findByExampleField($value): array
+        public function findByTplate($value): array
         {
-            return $this->createQueryBuilder('p')
-                ->andWhere('p.exampleField = :val')
-                ->setParameter('val', $value)
+            return $this->createQueryBuilder('p')//alias para la entidad
+                ->andWhere('p.tplate = :val')
+                ->setParameter('val', $value)//Se asigna el valor para el val de arriva
                 ->orderBy('p.id', 'ASC')
                 ->setMaxResults(10)
                 ->getQuery()
@@ -31,13 +31,18 @@ class PlateRepository extends ServiceEntityRepository
             ;
         }
 
+        
+
         public function findOneBySomeField($value): ?Plate
         {
             return $this->createQueryBuilder('p')
-                ->andWhere('p.exampleField = :val')
+                ->andWhere('p.tplate = :val')
                 ->setParameter('val', $value)
                 ->getQuery()
                 ->getOneOrNullResult()
             ;
         }
+
+
+
 }

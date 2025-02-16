@@ -50,6 +50,23 @@ class PlateServices
         return $plateJson;
     }
 
+    public function getPlatesForType($value): array
+    {
+        $plates = $this->plateRepository->findByTplate($value);
+        $plateJson = array();
+        
+        foreach ($plates as $plate) {
+            $plateJson[] = [
+                'name' => $plate->getName(),
+                'value' => $plate->getValue(),
+                'stock' => $plate->getStock(),
+            ];
+        }
+
+        return $plateJson;
+    }
+
+
     
 
 }

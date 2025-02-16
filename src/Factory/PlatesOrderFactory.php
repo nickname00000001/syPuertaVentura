@@ -3,7 +3,6 @@
 namespace App\Factory;
 
 use App\Entity\PlatesOrder;
-use App\Enum\TypePlate;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 use function Zenstruck\Foundry\faker;
 
@@ -35,7 +34,6 @@ final class PlatesOrderFactory extends PersistentProxyObjectFactory
     {
         return [
             'NroPlates' => faker()->numberBetween(1, 10),
-            'tplate' => faker()->randomElement(TypePlate::cases()),
             'NroOrder' => OrderFactory::random(),
         ];
     }

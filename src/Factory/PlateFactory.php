@@ -3,6 +3,7 @@
 namespace App\Factory;
 
 use App\Entity\Plate;
+use App\Enum\TypePlate;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 use function Zenstruck\Foundry\faker;
 
@@ -37,6 +38,7 @@ final class PlateFactory extends PersistentProxyObjectFactory
             'description' => faker()->sentence(),
             'Value' => faker()->randomFloat(2, 5, 50),
             'stock' => faker()->numberBetween(1, 100),
+            'tplate' => faker()->randomElement(TypePlate::cases()),
         ];
     }
 

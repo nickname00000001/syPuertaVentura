@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20250211014316 extends AbstractMigration
+final class Version20250216004919 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -33,7 +33,7 @@ final class Version20250211014316 extends AbstractMigration
         $this->addSql('CREATE SEQUENCE plates_order_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE SEQUENCE service_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE SEQUENCE service_per_entry_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
-        $this->addSql('CREATE SEQUENCE user_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE "user_id_seq" INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE SEQUENCE user_service_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE TABLE accommodation (id INT NOT NULL, location TEXT NOT NULL, accomodation_price INT NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE TABLE accommodation_service (accommodation_id INT NOT NULL, service_id INT NOT NULL, PRIMARY KEY(accommodation_id, service_id))');
@@ -64,8 +64,8 @@ final class Version20250211014316 extends AbstractMigration
         $this->addSql('CREATE TABLE payment_entry_pay (payment_entry_id INT NOT NULL, pay_id INT NOT NULL, PRIMARY KEY(payment_entry_id, pay_id))');
         $this->addSql('CREATE INDEX IDX_4E1A7372FAF00B2A ON payment_entry_pay (payment_entry_id)');
         $this->addSql('CREATE INDEX IDX_4E1A7372918501AB ON payment_entry_pay (pay_id)');
-        $this->addSql('CREATE TABLE plate (id INT NOT NULL, name VARCHAR(30) NOT NULL, description TEXT NOT NULL, value INT NOT NULL, stock INT NOT NULL, PRIMARY KEY(id))');
-        $this->addSql('CREATE TABLE plates_order (id INT NOT NULL, nro_order_id INT NOT NULL, nro_plates INT NOT NULL, tplate VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE plate (id INT NOT NULL, name VARCHAR(30) NOT NULL, description TEXT NOT NULL, value INT NOT NULL, stock INT NOT NULL, tplate VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE plates_order (id INT NOT NULL, nro_order_id INT NOT NULL, nro_plates INT NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_1D63043D7942F140 ON plates_order (nro_order_id)');
         $this->addSql('CREATE TABLE plates_order_plate (plates_order_id INT NOT NULL, plate_id INT NOT NULL, PRIMARY KEY(plates_order_id, plate_id))');
         $this->addSql('CREATE INDEX IDX_8BAFE1BAFA254608 ON plates_order_plate (plates_order_id)');
@@ -134,7 +134,7 @@ final class Version20250211014316 extends AbstractMigration
         $this->addSql('DROP SEQUENCE plates_order_id_seq CASCADE');
         $this->addSql('DROP SEQUENCE service_id_seq CASCADE');
         $this->addSql('DROP SEQUENCE service_per_entry_id_seq CASCADE');
-        $this->addSql('DROP SEQUENCE user_id_seq CASCADE');
+        $this->addSql('DROP SEQUENCE "user_id_seq" CASCADE');
         $this->addSql('DROP SEQUENCE user_service_id_seq CASCADE');
         $this->addSql('ALTER TABLE accommodation_service DROP CONSTRAINT FK_ADA9EE288F3692CD');
         $this->addSql('ALTER TABLE accommodation_service DROP CONSTRAINT FK_ADA9EE28ED5CA9E6');

@@ -62,54 +62,24 @@
 
 	<div class="option_restaurante">
 
-		<form action="/action_page.php">
+		<form data-controller="api" action="/action_page.php">
 			<div class="mb-3 mt-3">
 				<label for="">Tipo de plato</label>
-				<select name="" id="">
+				<select name="" id="" data-action="change->api#fetchData" data-api-target="select">
 					<option value="1">Entrantes</option>
-					<option value="1">Segundos</option>
-					<option value="1">Postres</option>
+					<option value="2">Segundos</option>
+					<option value="3">Postres</option>
 				</select>
 			</div>
-			<div class="container mt-3">
+
+			
 				<h2>Seleccione la cantidad:</h2>
-				<table class="table table-success table-hover">
-					<thead class="table-dark">
-						<tr>
-							<th>Nombre</th>
-							<th>Precio</th>
-							<th>Disponibilidad</th>
-							<th>Cantidad</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>John</td>
-							<td>Doe</td>
-							<td>john@example.com</td>
-							<td>john@example.com</td>
-						</tr>
-						<tr>
-							<td>Mary</td>
-							<td>Moe</td>
-							<td>mary@example.com</td>
-							<td>john@example.com</td>
-						</tr>
-						<tr>
-							<td>July</td>
-							<td>Dooley</td>
-							<td>july@example.com</td>
-							<td>john@example.com</td>
-						</tr>
-					</tbody>
-				</table>
+				<div data-api-target="output"></div>
+				
+
+
 			</div>
-			<div class="form-check mb-3">
-				<label class="form-check-label">
-					<input class="form-check-input" type="checkbox" name="remember">
-					Remember me
-				</label>
-			</div>
+			
 			<button type="submit" class="btn btn-primary">Pagar</button>
 		</form>
 	</div>
@@ -124,9 +94,13 @@
 	</div>
 
 
+	<h1>User Details</h1>
+
+
 	<div class="example-wrapper d-flex flex-column">
 		<h1>Hello
-			{{ controller_name }}! ✅</h1>
+			{{ controller_name }}!
+		</h1>
 
 		This friendly message is coming from:
 		<ul>
@@ -138,5 +112,5 @@
 			</li>
 		</ul>
 	</div>
-	<div data-controller="hello"></div>
+
 {% endblock %}

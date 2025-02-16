@@ -37,4 +37,15 @@ final class ReservationController extends AbstractController{
 
         return $this->json($plates, Response::HTTP_OK);
     }
+
+
+    #[Route('/api/tplates',name: 'platetype_get',methods:['GET'])]
+    public function listPlatesType(Request $request): JsonResponse
+    {
+        $type = $request->query->get('type');
+        $plates = $this->plateService->getPlatesForType($type);
+
+        return $this->json($plates, Response::HTTP_OK);
+    }
+
 }

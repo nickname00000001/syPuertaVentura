@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\TypePlate;
 use App\Repository\PlateRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -27,6 +28,9 @@ class Plate
 
     #[ORM\Column]
     private ?int $Stock = null;
+
+    #[ORM\Column(type: 'string', enumType: TypePlate::class)]
+    private ?TypePlate $tplate = null;
 
     /**
      * @var Collection<int, PlatesOrder>
@@ -115,6 +119,18 @@ class Plate
         if ($this->NroOrder->removeElement($nroOrder)) {
             $nroOrder->removePlate($this);
         }
+
+        return $this;
+    }
+
+    public function getTplate(): ?TypePlate
+    {
+        return $this->tplate;
+    }
+
+    public function setTplate(TypePlate $tplate): static
+    {
+        $this->tplate = $tplate;
 
         return $this;
     }
