@@ -2,6 +2,7 @@
 
 namespace App\Controller\Api;
 
+use App\Service\PayServices;
 use App\Service\PlateServices;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -13,10 +14,13 @@ final class ReservationController extends AbstractController{
 
     private PlateServices $plateService;
 
+    private PayServices $payService;
 
-    public function __construct(PlateServices $plateService)
+
+    public function __construct(PlateServices $plateService, PayServices $payService)
     {
         $this->plateService = $plateService;
+        $this->payService = $payService;
     }
 
     #[Route('/api/reservation', name: 'app_api_reservation')]
@@ -47,5 +51,18 @@ final class ReservationController extends AbstractController{
 
         return $this->json($plates, Response::HTTP_OK);
     }
+
+//------------------------------add pay   --------------------------------
+
+    #[Route('/api/pay',name: 'pay_set',methods:['GET'])]
+    public function addpay(Request $request): JsonResponse
+    {
+        $type = $request->query->get('type');
+        $this->payService->addPaymentEntry($request,nentrys,tlf);
+
+        return $this->json($plates, Response::HTTP_OK);
+    }
+
+
 
 }

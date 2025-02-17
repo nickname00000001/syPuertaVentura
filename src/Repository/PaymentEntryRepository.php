@@ -3,8 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\PaymentEntry;
+use App\Enum\PaymentStatus;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Faker\Provider\ar_EG\Payment;
 
 /**
  * @extends ServiceEntityRepository<PaymentEntry>
@@ -40,4 +42,20 @@ class PaymentEntryRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+
+    public function createPaymentEntry(PaymentEntry $payEntry): void
+    {
+    
+        // case s1 = 'Pagado';
+        // case s2 = 'Pendiente'; PaymentStatus
+        
+        $payEntry->setStatusP(PaymentStatus::s1);
+        $payEntry->setDatePayment(new \DateTime());
+        
+        $this->getEntityManager()->persist($payEntry);
+        $this->getEntityManager()->flush();
+    }
+
+
 }

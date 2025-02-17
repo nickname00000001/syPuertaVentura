@@ -22,9 +22,9 @@ class PlateServices
 
     private UserPasswordHasherInterface $passwordHasher;
 
-    public function __construct(PlateRepository $userRepository, EntityManagerInterface $entityManagerInterface,private EmailVerifier $emailVerifier,UserPasswordHasherInterface $passwordHasher)
+    public function __construct(PlateRepository $plateRepository, EntityManagerInterface $entityManagerInterface,private EmailVerifier $emailVerifier,UserPasswordHasherInterface $passwordHasher)
     {
-        $this->plateRepository = $userRepository;
+        $this->plateRepository = $plateRepository;
         $this->entityManagerInterface = $entityManagerInterface;
         $this->passwordHasher = $passwordHasher;
     }
