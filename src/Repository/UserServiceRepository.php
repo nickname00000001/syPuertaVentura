@@ -40,4 +40,17 @@ class UserServiceRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+public function createUserService($user, $servicio,$datereserve,$status): void
+    {
+    
+
+        $userS = new UserService();
+        $userS->addUsuario($user);
+        $userS->addServiceR($servicio);
+        $userS->setReservationDate(new \DateTime());
+        $userS->setState($status);
+        $this->getEntityManager()->persist($userS);
+        $this->getEntityManager()->flush();
+    }
 }

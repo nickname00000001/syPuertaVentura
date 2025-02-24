@@ -40,4 +40,14 @@ class OrderRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function createOrder($status,$comidaAsociada): void
+    {
+
+        $order = new Order();
+        $order->setStatus($status);
+        $order->setFoodOrder($comidaAsociada);
+        $this->getEntityManager()->persist($order);
+        $this->getEntityManager()->flush();
+    }
 }

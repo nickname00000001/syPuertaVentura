@@ -40,4 +40,16 @@ class FoodRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+public function createFood($pagototal,$servicioAsociado): void
+    {
+    
+
+        $food = new Food();
+        $food->setPayment($pagototal);
+        $food->addServiceFood($servicioAsociado);
+        $this->getEntityManager()->persist($food);
+        $this->getEntityManager()->flush();
+    }
+
 }

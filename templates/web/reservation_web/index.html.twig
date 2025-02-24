@@ -47,10 +47,7 @@
 
 
 	</div>
-	<div class="d-flex justify-content-center bg-info">
-		<h1>selecciona el numero de entradas:</h1>
-		<input type="number" name="" id="">
-	</div>
+
 	<div>
 		<h1>Nuestros servicios:</h1>
 		<select name="" id="">
@@ -62,7 +59,13 @@
 
 	<div class="option_restaurante">
 
-		<form data-controller="api" action="/action_page.php">
+		<form data-controller="api" action="/api/pay" method="post">
+
+			<div class="d-flex justify-content-center bg-info">
+				<h1>selecciona el numero de entradas:</h1>
+				<input type="number" name="nentrys" id="nentrys">
+			</div>
+
 			<div class="mb-3 mt-3">
 				<label for="">Tipo de plato</label>
 				<select name="" id="" data-action="change->api#fetchData" data-api-target="select">
@@ -72,45 +75,48 @@
 				</select>
 			</div>
 
-			
-				<h2>Seleccione la cantidad:</h2>
-				<div data-api-target="output"></div>
-				
+
+			<h2>Seleccione la cantidad:</h2>
+			<div data-api-target="output"></div>
 
 
-			</div>
-			
-			<button type="submit" class="btn btn-primary">Pagar</button>
-		</form>
-	</div>
+		</div>
+		<div class="datos">
+			<input type="text" name="tipoPago" id="tipoPago" value="efectivo" placeholder="Nombre">
+		</div>
+		<div>
+		<input type="number" name="total" id="total" value="0" placeholder="0">
+		<input type="number" name="tlf" id="tlf" value="" placeholder="Introduce un numero de telefono">
+		</div>
+		<button type="submit" data-action="click->api#pay" data-api-target="payButton" class="btn btn-primary">Pagar</button>
+	</form>
+</div>
 
-	<div>
-		<h1>Nuestras atracciones:</h1>
-		<select name="" id="">
-			<option value="1">Hospedaje</option>
-			<option value="2">Camping</option>
-			<option value="3">Restaurante</option>
-		</select>
-	</div>
+<div>
+	<h1>Nuestras atracciones:</h1>
+	<select name="" id="">
+		<option value="1">Hospedaje</option>
+		<option value="2">Camping</option>
+		<option value="3">Restaurante</option>
+	</select>
+</div>
 
 
-	<h1>User Details</h1>
+<h1>User Details</h1>
 
 
-	<div class="example-wrapper d-flex flex-column">
-		<h1>Hello
-			{{ controller_name }}!
-		</h1>
+<div class="example-wrapper d-flex flex-column">
+	<h1>Hello
+		{{ controller_name }}!
+	</h1>
 
-		This friendly message is coming from:
-		<ul>
-			<li>Your controller at
-				<code>/home/ubuntu00/nick/appPuertaVentura/syPuertaventura/appPuertaVentura/src/Controller/Web/ReservationWebController.php</code>
-			</li>
-			<li>Your template at
-				<code>/home/ubuntu00/nick/appPuertaVentura/syPuertaventura/appPuertaVentura/templates/web/reservation_web/index.html.twig</code>
-			</li>
-		</ul>
-	</div>
-
-{% endblock %}
+	This friendly message is coming from:
+	<ul>
+		<li>Your controller at
+			<code>/home/ubuntu00/nick/appPuertaVentura/syPuertaventura/appPuertaVentura/src/Controller/Web/ReservationWebController.php</code>
+		</li>
+		<li>Your template at
+			<code>/home/ubuntu00/nick/appPuertaVentura/syPuertaventura/appPuertaVentura/templates/web/reservation_web/index.html.twig</code>
+		</li>
+	</ul>
+</div>{% endblock %}

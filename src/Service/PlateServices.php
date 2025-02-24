@@ -57,6 +57,7 @@ class PlateServices
         
         foreach ($plates as $plate) {
             $plateJson[] = [
+                'id' => $plate->getId(),
                 'name' => $plate->getName(),
                 'value' => $plate->getValue(),
                 'stock' => $plate->getStock(),

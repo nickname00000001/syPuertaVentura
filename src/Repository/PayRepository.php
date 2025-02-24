@@ -60,7 +60,7 @@ class PayRepository extends ServiceEntityRepository
         $this->getEntityManager()->flush();
     }
 
-    public function createPayEntry(Pay $pay,$typePay,User $iduser,$total): void
+    public function createPayEntry(Pay $pay,$typePay,$iduser,$total): void
     {
     
         if ($typePay == 'efectivo')  {

@@ -47,33 +47,40 @@ class PayServices
 
     ////
 
-    public function addPaymentEntry( Request $request,$nentrys,$tlf)
+    public function addPaymentEntry( Request $request)
     {
 
-        $body = $request->getContent();
-        $data = json_decode($body, true);
+        $data = $request->request->all();
+
 
         $Stypepay = $data['tipoPago'];
         $total = $data['total'];
+        $nentrys = $data['nentrys'];
+        $tlf = $data['tlf'];
 
          // returns User object or null if not authenticated
          $user = $this->security->getUser();
 
         $payEntry = new PaymentEntry();
         
+
         $this->payER->createPaymentEntry($payEntry);
 
 
         $pay = new Pay();
 
+        //creo un pago
         $this->pay->createPayEntry($pay,$Stypepay,$user,$total);
 
+
+        //Al pago le añado e payentry id
         $this->pay->addPaymentEntry($pay,$payEntry);
 
         for ($i = 0; $i < $nentrys; $i++) {
             $entry = new Entry();
             $this->entryR->createEntry($entry,$tlf);
 
+            //A cada entrada le paso el id del payentry
             $this->entryR->addEntryPayment($entry,$payEntry);
 
             
@@ -82,5 +89,8 @@ class PayServices
         
         
     }
+
+
+
 
 }

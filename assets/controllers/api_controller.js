@@ -6,7 +6,7 @@ import { Controller } from '@hotwired/stimulus';
 */
 /* stimulusFetch: 'lazy' */
 export default class extends Controller {
-    static targets = ['output','select'];
+    static targets = ['output','select','payButton'];
 
     connect() {
         console.log("Stimulus API Controller connected!");
@@ -48,7 +48,7 @@ export default class extends Controller {
             const thead = document.createElement('thead');
             thead.classList.add('table-dark');
             const headerRow = document.createElement('tr');
-            const headers = ['Nombre', 'Precio', 'Disponible','Cantidad'];
+            const headers = ['Nombre', 'Precio', 'Disponible','Cantidad','Accion'];
 
             headers.forEach(headerText => {
                 const th = document.createElement('th');
@@ -78,13 +78,31 @@ export default class extends Controller {
                 stockCell.textContent = plate.stock;
                 row.appendChild(stockCell);
 
+               
+
                 const quantityCell = document.createElement('td');
                 const input = document.createElement('input');
                 input.type = 'number';
+                input.id = `quantity-${plate.id}`;
                 input.min = 0;
                 input.value = 0;
                 quantityCell.appendChild(input);
                 row.appendChild(quantityCell);
+
+                const accionCell = document.createElement('td');
+
+                const addButton = document.createElement('button');
+                addButton.textContent = 'Añadir';
+                addButton.classList.add('btn', 'btn-success', 'me-2');
+                addButton.addEventListener('click',(event) => this.updateOrder(event, plate.id));
+                accionCell.appendChild(addButton);
+
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Eliminar';
+                deleteButton.classList.add('btn', 'btn-danger');
+                accionCell.appendChild(deleteButton);
+
+                row.appendChild(accionCell);
 
                 tbody.appendChild(row);
             });
@@ -98,4 +116,90 @@ export default class extends Controller {
             this.outputTarget.innerHTML = `<p style="color: red;">Error al obtener datos</p>`;
         }
     }
+
+
+
+
+    async pay(event) {
+
+        
+        event.preventDefault(); // Evitar recargar la página
+
+        const url = '/api/pay'; // URL de la API
+
+        console.log(this.outputTarget);
+        const data = {
+            type: selectedValue,
+            // Agrega más datos según sea necesario
+        };
+
+        try {
+            const response = await fetch(url, {
+                method: 'POST', // Método POST
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data), // Cuerpo de la solicitud
+            });
+
+             if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const data = await response.json();
+
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            this.outputTarget.innerHTML = `<p style="color: red;">Error al obtener datos</p>`;
+        }
+    }
+
+
+    async updateOrder(event,plateId) {
+
+        event.preventDefault(); // Evitar recargar la página
+
+        
+        const input = document.getElementById(`quantity-${plateId}`);
+        if (!input) {
+            console.error(`Element with id quantity-${plateId} not found`);
+            return;
+        }
+        const quantity = input.value;
+
+        const url = '/api/ordersession'; // URL de la API
+
+        const data = {
+            id: plateId,
+            cantidad: quantity
+        };
+
+        try {
+            const response = await fetch(url, {
+                method: 'POST', // Método POST
+                headers: {
+                    'Content-Type': 'application/json', // Tipo de contenido
+                },
+                body: JSON.stringify(data), // Cuerpo de la solicitud
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const responseData = await response.json();
+
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            this.outputTarget.innerHTML = `<p style="color: red;">Error al obtener datos</p>`;
+        }
+    }
+
+
+
+
+
+
+
+
 }

@@ -54,13 +54,43 @@ final class ReservationController extends AbstractController{
 
 //------------------------------add pay   --------------------------------
 
-    #[Route('/api/pay',name: 'pay_set',methods:['GET'])]
+    #[Route('/api/pay',name: 'pay_set',methods:['POST'])]
     public function addpay(Request $request): JsonResponse
     {
-        $type = $request->query->get('type');
-        $this->payService->addPaymentEntry($request,nentrys,tlf);
 
-        return $this->json($plates, Response::HTTP_OK);
+        //si tiene algun dato en la session de orden entondes recorro el array y creo una orden con platos
+
+        $session = $request->getSession();
+        $platos = $session->get('platos',[]);
+        
+        $this->payService->addPaymentEntry($request);
+
+        return $this->json("Pago por entrada añadido con exito",Response::HTTP_OK);
+    }
+
+
+    #[Route('/api/ordersession',name: 'oder_add',methods:['POST'])]
+    public function orderplates(Request $request): JsonResponse
+    {
+
+        $session = $request->getSession();
+        $platos = $session->get('platos',[]);
+        $data = json_decode($request->getContent(), true);
+
+        if (!isset($data['id']) || !isset($data['cantidad'])) {
+            return $this->json(['error' => 'Invalid data'], Response::HTTP_BAD_REQUEST);
+        }
+
+        $platoId = $data['id'];
+        $cantidad = $data['cantidad'];
+
+        // Actualizar o agregar el plato en la variable de sesión
+        $platos[$platoId] = $cantidad;
+
+        // Guardar los datos actualizados en la sesión
+        $session->set('platos', $platos);
+
+        return $this->json(['platos' => $platos,'success' => 'Plato actualizado con éxito'], Response::HTTP_OK);
     }
 
 

@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Plate;
+use App\Enum\TypePlate;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -43,6 +44,25 @@ class PlateRepository extends ServiceEntityRepository
             ;
         }
 
+
+        public function createPlate($typePlate,$nombre,$descripcion,$precio,$stock): void
+    {
+    
+        if ($typePlate == 'Entrante')  {
+            $typePlate = TypePlate::p1;
+        }else if($typePlate == 'Segundo'){
+            $typePlate = TypePlate::p2;
+        }else  $typePlate = TypePlate::p3;
+
+        $plate = new Plate();
+        $plate->setTPlate($typePlate);
+        $plate->setName($nombre);
+        $plate->setDescription($descripcion);
+        $plate->setValue($precio);
+        $plate->setStock($stock);
+        $this->getEntityManager()->persist($plate);
+        $this->getEntityManager()->flush();
+    }
 
 
 }

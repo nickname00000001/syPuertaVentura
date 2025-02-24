@@ -40,4 +40,14 @@ class PlatesOrderRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+public function createPlatesOrder($order,$nplatos): void
+    {
+    
+        $pOrder = new PlatesOrder();
+        $pOrder->setNroOrder($order);
+        $pOrder->setNroPlates($nplatos);
+        $this->getEntityManager()->persist($pOrder);
+        $this->getEntityManager()->flush();
+    }
 }

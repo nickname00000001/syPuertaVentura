@@ -40,4 +40,14 @@ class ServicePerEntryRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function createServiceEntry($servicio, $entrada): void
+    {
+    
+        $serviceEntry = new ServicePerEntry();
+        $serviceEntry->addService($servicio);
+        $serviceEntry->addEntry($entrada);
+        $this->getEntityManager()->persist($serviceEntry);
+        $this->getEntityManager()->flush();
+    }
 }
