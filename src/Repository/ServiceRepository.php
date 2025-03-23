@@ -42,14 +42,13 @@ class ServiceRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-    public function createService($tlf, $npersonas,$nameSevice): void
+    public function createService(Service $service,$tlf, $npersonas,$nameSevice): void
     {
 
         if ($nameSevice == 'Comida') {
             $nameSevice = ServiceType::uno;
         } else  $nameSevice = ServiceType::dos;
 
-        $service = new Service();
         $service->setPhoneNumber($tlf);
         $service->setNumberPeople($npersonas);
         $service->setType($nameSevice);

@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Order;
+use App\Enum\StatusOrder;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -41,11 +42,16 @@ class OrderRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-    public function createOrder($status,$comidaAsociada): void
+    public function createOrder($comidaAsociada,$orderTipe): void
     {
 
+        // o1= entregado o2= pendiente
+        if ($orderTipe == 'Comida') {
+            $orderTipe = StatusOrder::o1;
+        } else  $orderTipe = StatusOrder::o2;
+        
         $order = new Order();
-        $order->setStatus($status);
+        $order->setStatus($orderTipe);
         $order->setFoodOrder($comidaAsociada);
         $this->getEntityManager()->persist($order);
         $this->getEntityManager()->flush();
