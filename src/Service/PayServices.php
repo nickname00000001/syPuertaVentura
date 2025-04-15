@@ -4,8 +4,10 @@ namespace App\Service;
 
 use App\Entity\Entry;
 use App\Entity\Food;
+use App\Entity\Order;
 use App\Entity\Pay;
 use App\Entity\PaymentEntry;
+use App\Entity\Plate;
 use App\Entity\PlatesOrder;
 use App\Entity\Service;
 use App\Entity\ServicePerEntry;
@@ -18,9 +20,12 @@ use Doctrine\ORM\EntityManagerInterface;
 
 use App\Entity\User;
 use App\Repository\EntryRepository;
+use App\Repository\FoodRepository;
 use App\Repository\OrderRepository;
 use App\Repository\PaymentEntryRepository;
 use App\Repository\PayRepository;
+use App\Repository\PlateRepository;
+use App\Repository\PlatesOrderRepository;
 use App\Repository\ServicePerEntryRepository;
 use App\Repository\ServiceRepository;
 use App\Security\EmailVerifier;
@@ -51,9 +56,17 @@ class PayServices
 
     private OrderRepository $orderRepository;
 
+    private PlatesOrder $plateOrder;
+
+    private PlatesOrderRepository $plateOrderRepository;
+
+    private PlateRepository $plateRepository;
+
+    private FoodRepository $foodRepository;
 
 
-    public function __construct(OrderRepository $orderRepository,Food $food,Order $order,ServiceRepository $serviceRepositrory,ServicePerEntryRepository $serviceEntryRepository, Service $service, PaymentEntryRepository $payER, PayRepository $pay, EntryRepository $entryR, EntityManagerInterface $entityManagerInterface, private Security $security)
+
+    public function __construct(FoodRepository $foodRepository,PlateRepository $plateRepositiry,PlatesOrder $plateOrder,PlatesOrderRepository $plateOrderRepository, OrderRepository $orderRepository,Food $food,Order $order,ServiceRepository $serviceRepositrory,ServicePerEntryRepository $serviceEntryRepository, Service $service, PaymentEntryRepository $payER, PayRepository $pay, EntryRepository $entryR, EntityManagerInterface $entityManagerInterface, private Security $security)
     {
         $this->payER = $payER;
         $this->entityManagerInterface = $entityManagerInterface;
@@ -62,9 +75,13 @@ class PayServices
         $this->order = $order;
         $this->entryR = $entryR;
         $this->service = $service;
+        $this->plateOrder = $plateOrder;
+        $this->foodRepository = $foodRepository;
+        $this->plateOrderRepository = $plateOrderRepository;
         $this->serviceEntryRepository = $serviceEntryRepository;
         $this->serviceRepository = $serviceRepositrory;
         $this->orderRepository = $orderRepository;
+        $this->plateRepository = $plateRepositiry;
 
     }
 
@@ -115,7 +132,7 @@ class PayServices
     //arreglar bien esto--------------------------------------------->>>>>>>>>>>>>>>>>>>>
 
 
-    public function eating(Entry $entry)
+    public function eating(Entry $entry,Request $request)
     {
 
         $service = new Service();
@@ -133,27 +150,31 @@ class PayServices
         $session = $request->getSession();
         $platos = $session->get('platos', []);
 
+        $total = 0;
 
 
         foreach ($platos as $platoId => $cantidad) {
 
 
 
-            buscar el plato con id 1 ejmp
-            
+            ///////////////////////////////////////////////////
+            $plate = $this->plateRepository->find($platoId);
+
+            if (!$plate) {
+                throw new \Exception("Plato com ID $platoId no encontrado");
+            }
+
+            $precio = $plate->getValue();
+
+            $total += $precio * $cantidad;
 
             $plateOrder = new PlatesOrder();
-            $this->plateOrderRepository->createPlatesOrder($idPlate, $orden,$cantidad);
-
-
-
+            $this->plateOrderRepository->createPlatesOrder($plate, $order,$cantidad);
 
         }
 
-
-        calcular total
-        
-        $this->foodService->createFood($eat,total,$serviceAssociate);
+        // le paso la comida, el total y el servicio asociado
+        $this->foodRepository->createFood($food,$total,$service);
 
 
         //asociar el servicio creado a la entrada
